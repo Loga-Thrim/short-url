@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History</title>
+  </head>
+  <body>
+    <div id="app">
+        <table>
+            <tr>
+                <th>Short url</th>
+                <th>Original url</th>
+                <th>Viewed</th>
+            </tr>
+            <tr v-for="item in list">
+                <td>http://localhost:1234/{{item.path}}</td>
+                <td>{{item.url}}</td>
+                <td>{{item.view}}</td>
+            </tr>
+        </table>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const { createApp } = Vue;
+
+      createApp({
+        data() {
+          return {
+            list: []
+          };
+        },
+        mounted() {
+          fetch("http://localhost:1234/history")
+            .then((res) => res.json())
+            .then((res) => {
+              this.list = res.result;
+            });
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
