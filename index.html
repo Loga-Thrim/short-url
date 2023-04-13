@@ -94,7 +94,7 @@
       function createShortUrl() {
         const url = document.getElementById("url-link").value;
 
-        fetch("http://localhost:1234/get-url", {
+        fetch("https://miniurl.herokuapp.com/get-url", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ url }),

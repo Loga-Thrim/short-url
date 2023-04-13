@@ -46,8 +46,8 @@
         </tr>
         <tr v-for="item in list">
           <td>
-            <a :href="'http://localhost:1234/' + item.path" target="_blank"
-              >http://localhost:1234/{{item.path}}</a
+            <a :href="'https://miniurl.herokuapp.com/' + item.path" target="_blank"
+              >https://miniurl.herokuapp.com/{{item.path}}</a
             >
           </td>
           <td>
@@ -69,7 +69,7 @@
           };
         },
         mounted() {
-          fetch("http://localhost:1234/api/history")
+          fetch("https://miniurl.herokuapp.com/api/history")
             .then((res) => res.json())
             .then((res) => {
               this.list = res.result;

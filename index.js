@@ -4,7 +4,9 @@ const cors = require("cors")
 const { MongoClient } = require("mongodb")
 const app = express()
 
-const url = 'mongodb://localhost:27017';
+const port = process.env.PORT || 3000
+
+const url = 'mongodb+srv://logathrim:WLf6yB3JdWlp4DwP@short-url-cluster.h96gkgm.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(url);
 
 function makeid(length) {
@@ -69,9 +71,9 @@ app.post("/get-url", async (req, res) => {
 
     await collection.insertOne({ url, path, view: 0 })
 
-    res.json({shortUrl: "http://localhost:1234/" + path})
+    res.json({shortUrl: "https://miniurl.herokuapp.com/" + path})
 })
 
-app.listen(1234, function() {
+app.listen(port, function() {
     console.log("Node.js working ...")
 })
