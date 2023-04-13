@@ -23,7 +23,15 @@ app.use(body.json())
 app.use(body.urlencoded())
 app.use(cors())
 
-app.get("/history", async (req, res) => {
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/index.html")
+})
+
+app.get("/history", (req, res) => {
+    res.sendFile(__dirname + "/history.html")
+})
+
+app.get("/api/history", async (req, res) => {
     await client.connect()
     const db = client.db("jigsaw-interview")
     const collection = db.collection('short-url')
@@ -35,6 +43,11 @@ app.get("/history", async (req, res) => {
 
 app.get("*", async (req, res) => {
     const path = req.originalUrl.slice(1)
+
+    if(path === 'favicon.ico') {
+        res.send()
+        return
+    }
 
     await client.connect()
     const db = client.db("jigsaw-interview")
